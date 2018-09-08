@@ -5,13 +5,13 @@ Electrovalvula::Electrovalvula(uint8_t _pin, uint8_t _estado)
 
 Electrovalvula::~Electrovalvula() {}
 
-void Electrovalvula::abrir(PCF8574 _pcf)
+void Electrovalvula::abrir(PCF8574& _pcf)
 {
     _pcf.write(this->pin, HIGH);
-    this->estado = this->ACTIVADO;
+    this->estado = ACTIVADO;
 }
 
-void Electrovalvula::abrir(PCF8574 _pcf, void (*_callback)(void))
+void Electrovalvula::abrir(PCF8574& _pcf, void (*_callback)(void))
 {
     this->abrir(_pcf);
     if (_callback != 0)
@@ -20,13 +20,13 @@ void Electrovalvula::abrir(PCF8574 _pcf, void (*_callback)(void))
     }
 }
 
-void Electrovalvula::cerrar(PCF8574 _pcf)
+void Electrovalvula::cerrar(PCF8574& _pcf)
 {
     _pcf.write(this->pin, LOW);
-    this->estado = this->DESACTIVADO;
+    this->estado = DESACTIVADO;
 }
 
-void Electrovalvula::cerrar(PCF8574 _pcf, void (*_callback)(void))
+void Electrovalvula::cerrar(PCF8574& _pcf, void (*_callback)(void))
 {
     this->cerrar(_pcf);
     if (_callback != 0)

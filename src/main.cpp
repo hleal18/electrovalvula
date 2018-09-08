@@ -1,28 +1,45 @@
 #include <PCF8574.h>
-#include <Wire.h>
+#include <Electrovalvula.h>
 
+// A4 - SDA
+// A5 - SCL
 PCF8574 pcf20(0x20);
-
-const byte onboardLed = 13;
-const byte PcfButtonLedPin = 0;
-const byte PcfLed0 = 0;
-const byte PcfLed1 = 1;
-
-unsigned int blinkMillis;
-unsigned int buttonMillis;
+Electrovalvula valvula1(0);
+Electrovalvula valvula2(1);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   pcf20.begin();
 }
 
 void loop() {
   delay(1000);
-  Serial.println("Alto");
-  pcf20.write(PcfLed0, HIGH);
-  pcf20.write(PcfLed1, LOW);
+  valvula1.abrir(pcf20);
+  Serial.println("Valvula 1 abierta");
+  Serial.print("Estado: ");
+  Serial.println(valvula1.getEstado());
+  Serial.print("Pin: ");
+  Serial.println(valvula1.getPin());
   delay(1000);
-  Serial.println("Bajo");
-  pcf20.write(PcfLed0, LOW);
-  pcf20.write(PcfLed1, HIGH);
+  valvula2.abrir(pcf20);
+  Serial.println("Valvula 2 abierta");
+  Serial.print("Estado: ");
+  Serial.println(valvula2.getEstado());
+  Serial.print("Pin: ");
+  Serial.println(valvula2.getPin());
+  delay(1000);
+  valvula1.cerrar(pcf20);
+  Serial.println("Valvula 1 cerrada");
+  Serial.print("Estado: ");
+  Serial.println(valvula1.getEstado());
+  Serial.print("Pin: ");
+  Serial.println(valvula1.getPin());
+  delay(1000);
+  valvula2.cerrar(pcf20);
+  Serial.println("Valvula 2 cerrada");
+  Serial.print("Estado: ");
+  Serial.println(valvula2.getEstado());
+  Serial.print("Pin: ");
+  Serial.println(valvula2.getPin());
+  delay(1000);
 }

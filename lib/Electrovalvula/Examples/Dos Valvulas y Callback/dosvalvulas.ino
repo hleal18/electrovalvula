@@ -1,6 +1,8 @@
 #include <PCF8574.h>
 #include <Electrovalvula.h>
 
+// A4 - SDA
+// A5 - SCL
 PCF8574 pcf20(0x20);
 Electrovalvula valvula1(0);
 Electrovalvula valvula2(1);

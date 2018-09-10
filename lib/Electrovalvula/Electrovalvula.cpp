@@ -11,6 +11,12 @@ void Electrovalvula::abrir()
     this->estado = ACTIVADO;
 }
 
+void Electrovalvula::cerrar()
+{
+    this->pcf.write(this->pin, LOW);
+    this->estado = DESACTIVADO;
+}
+
 void Electrovalvula::abrir(void (*_callback)(void))
 {
     this->abrir();
@@ -18,12 +24,6 @@ void Electrovalvula::abrir(void (*_callback)(void))
     {
         _callback();
     }
-}
-
-void Electrovalvula::cerrar()
-{
-    this->pcf.write(this->pin, LOW);
-    this->estado = DESACTIVADO;
 }
 
 void Electrovalvula::cerrar(void (*_callback)(void))
